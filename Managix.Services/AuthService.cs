@@ -1,5 +1,4 @@
 ﻿using Managix.Infrastructure;
-using Managix.Infrastructure.Authentication;
 using Managix.Infrastructure.Configuration;
 using Managix.Infrastructure.Helper;
 using Managix.IServices;
@@ -15,14 +14,12 @@ namespace Managix.Services
 {
     public class AuthService : Service, IAuthService
     {
-        private readonly ICache _cache;
         private readonly IRepository<UserEntity> _userRepo;
         private readonly IRepository<PermissionEntity> _permissionRepo;
         private readonly IRepository<RolePermissionEntity> _rolePermissionRepo;
-        public AuthService(IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> userRepo, ICache cache, IRepository<PermissionEntity> permissionRepo)
+        public AuthService(IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> userRepo, IRepository<PermissionEntity> permissionRepo)
         {
             _userRepo = userRepo;
-            _cache = cache;
             _permissionRepo = permissionRepo;
             _rolePermissionRepo = rolePermissionRepo;
         }
@@ -33,7 +30,7 @@ namespace Managix.Services
             var guid = Guid.NewGuid().ToString("N");
             var key = string.Format(CacheKey.PassWordEncryptKey, guid);
             var encyptKey = StringHelper.GenerateRandom(8);
-            await _cache.SetAsync(key, encyptKey, TimeSpan.FromMinutes(5));
+            await BaseCache.SetAsync(key, encyptKey, TimeSpan.FromMinutes(5));
             var data = new { key = guid, encyptKey };
             return ResponseOutput.Ok(data);
         }
