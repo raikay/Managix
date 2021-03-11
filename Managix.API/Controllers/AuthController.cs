@@ -46,6 +46,11 @@ namespace Managix.API.Controllers
         [AllowAnonymous]
         public async Task<IResponseOutput> GetVerifyCode(string lastKey)
         {
+            //var ss=ControllerContext.HttpContext;
+            //var s1 = ControllerContext.HttpContext.Request;
+            //var s2 = ControllerContext.HttpContext.Request.Host;
+            //var s3 = ControllerContext.HttpContext.Request.QueryString;
+            //var s4 = ControllerContext.HttpContext.Request.Path;
             _logger.LogInformation("获取验证码");
             return await _service.GetVerifyCodeAsync(lastKey);
         }
