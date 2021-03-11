@@ -85,13 +85,13 @@ namespace Managix.Services
             //删除上次缓存的验证码
             if (lastKey.NotNull())
             {
-                await _cache.DelAsync(lastKey);
+                await BaseCache.DelAsync(lastKey);
             }
 
             //写入Redis
             var guid = Guid.NewGuid().ToString("N");
             var key = string.Format(CacheKey.VerifyCodeKey, guid);
-            await _cache.SetAsync(key, code, TimeSpan.FromMinutes(5));
+            await BaseCache.SetAsync(key, code, TimeSpan.FromMinutes(5));
 
             var data = new { Key = guid, Img = img };
             return ResponseOutput.Ok(data);
@@ -103,10 +103,10 @@ namespace Managix.Services
             if (Configs.AppSettings.VarifyCode.Enable)
             {
                 var verifyCodeKey = string.Format(CacheKey.VerifyCodeKey, param.VerifyCodeKey);
-                var exists = await _cache.ExistsAsync(verifyCodeKey);
+                var exists = await BaseCache.ExistsAsync(verifyCodeKey);
                 if (exists)
                 {
-                    var verifyCode = await _cache.GetAsync(verifyCodeKey);
+                    var verifyCode = await BaseCache.GetAsync(verifyCodeKey);
                     if (string.IsNullOrEmpty(verifyCode))
                     {
                         return ResponseOutput.NotOk("验证码已过期！");
@@ -115,7 +115,7 @@ namespace Managix.Services
                     {
                         return ResponseOutput.NotOk("验证码输入有误！", 2);
                     }
-                    await _cache.DelAsync(verifyCodeKey);
+                    await BaseCache.DelAsync(verifyCodeKey);
                 }
                 else
                 {
@@ -134,16 +134,16 @@ namespace Managix.Services
             if (param.PasswordKey.NotNull())
             {
                 var passwordEncryptKey = string.Format(CacheKey.PassWordEncryptKey, param.PasswordKey);
-                var existsPasswordKey = await _cache.ExistsAsync(passwordEncryptKey);
+                var existsPasswordKey = await BaseCache.ExistsAsync(passwordEncryptKey);
                 if (existsPasswordKey)
                 {
-                    var secretKey = await _cache.GetAsync(passwordEncryptKey);
+                    var secretKey = await BaseCache.GetAsync(passwordEncryptKey);
                     if (secretKey.IsNull())
                     {
                         return ResponseOutput.NotOk("解密失败！", 1);
                     }
                     param.Password = DesEncrypt.Decrypt(param.Password, secretKey);
-                    await _cache.DelAsync(passwordEncryptKey);
+                    await BaseCache.DelAsync(passwordEncryptKey);
                 }
                 else
                 {
