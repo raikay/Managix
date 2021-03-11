@@ -18,7 +18,7 @@ namespace Managix.Repository
             var assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.ExportedTypes)
             {
-                if (type.IsClass && type != typeof(Root) && type != typeof(EntityBase) && typeof(Root).IsAssignableFrom(type))
+                if (type.IsClass && type != typeof(Root) && typeof(Root).IsAssignableFrom(type))
                 {
                     var method = modelBuilder.GetType().GetMethods().Where(x => x.Name == "Entity").FirstOrDefault();
 
