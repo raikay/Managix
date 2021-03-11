@@ -19,12 +19,10 @@ namespace Managix.Services
         private readonly IRepository<UserEntity> _userRepo;
         private readonly IRepository<PermissionEntity> _permissionRepo;
         private readonly IRepository<RolePermissionEntity> _rolePermissionRepo;
-        private readonly IUser _user;
-        public AuthService(IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> userRepo, ICache cache, IUser user, IRepository<PermissionEntity> permissionRepo)
+        public AuthService(IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> userRepo, ICache cache, IRepository<PermissionEntity> permissionRepo)
         {
             _userRepo = userRepo;
             _cache = cache;
-            _user = user;
             _permissionRepo = permissionRepo;
             _rolePermissionRepo = rolePermissionRepo;
         }
@@ -42,15 +40,13 @@ namespace Managix.Services
 
         public async Task<IResponseOutput> GetUserInfoAsync()
         {
-            var name = _user?.Name;
-            var nickName = _user?.NickName;
-            if (string.IsNullOrEmpty(_user?.Id))
+            if (string.IsNullOrEmpty(User?.Id))
             {
                 return ResponseOutput.NotOk("未登录！");
             }
 
             //用户信息
-            var user = await _userRepo.FindByIdAsync(_user.Id);
+            var user = await _userRepo.FindByIdAsync(User.Id);
             var rolePerList = _rolePermissionRepo.Query.Where(c => c.RoleId == user.RoleId);
             var rolePerIds = rolePerList.Select(x => x.PermissionId);
 
