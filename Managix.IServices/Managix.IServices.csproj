@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Managix.Common\Managix.Common.csproj" />
-    <ProjectReference Include="..\Managix.Core\Managix.Common.csproj" />
     <ProjectReference Include="..\Managix.Repository\Managix.Repository.csproj" />
   </ItemGroup>
 
