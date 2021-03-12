@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Services", "Managix
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Repository", "Managix.Repository\Managix.Repository.csproj", "{4E47ADFB-763A-4B62-A911-BA14589F525B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Core", "Managix.Core\Managix.Core.csproj", "{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Common", "Managix.Common\Managix.Common.csproj", "{6E8F3017-AC9B-449F-9DC7-AC3A3ED02061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8F3017-AC9B-449F-9DC7-AC3A3ED02061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8F3017-AC9B-449F-9DC7-AC3A3ED02061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8F3017-AC9B-449F-9DC7-AC3A3ED02061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8F3017-AC9B-449F-9DC7-AC3A3ED02061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
