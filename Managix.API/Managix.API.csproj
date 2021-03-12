@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Managix.Core\Managix.Core.csproj" />
     <ProjectReference Include="..\Managix.Services\Managix.Services.csproj" />
   </ItemGroup>
 

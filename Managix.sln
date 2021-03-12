@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managix.API", "Managix.API\Managix.API.csproj", "{8BBEC449-7FE5-44F4-A8D2-E3867730F0A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.API", "Managix.API\Managix.API.csproj", "{8BBEC449-7FE5-44F4-A8D2-E3867730F0A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managix.IServices", "Managix.IServices\Managix.IServices.csproj", "{5BA25263-15CA-4C24-8F0F-1200EFDDCA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.IServices", "Managix.IServices\Managix.IServices.csproj", "{5BA25263-15CA-4C24-8F0F-1200EFDDCA5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managix.Services", "Managix.Services\Managix.Services.csproj", "{A98319F4-65E1-4559-B005-4B0A98A12350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Services", "Managix.Services\Managix.Services.csproj", "{A98319F4-65E1-4559-B005-4B0A98A12350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managix.Infrastructure", "Managix.Infrastructure\Managix.Infrastructure.csproj", "{03E7E992-5888-4322-87B3-ADA7D65A318B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Repository", "Managix.Repository\Managix.Repository.csproj", "{4E47ADFB-763A-4B62-A911-BA14589F525B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managix.Repository", "Managix.Repository\Managix.Repository.csproj", "{4E47ADFB-763A-4B62-A911-BA14589F525B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managix.Core", "Managix.Core\Managix.Core.csproj", "{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{A98319F4-65E1-4559-B005-4B0A98A12350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98319F4-65E1-4559-B005-4B0A98A12350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98319F4-65E1-4559-B005-4B0A98A12350}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03E7E992-5888-4322-87B3-ADA7D65A318B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03E7E992-5888-4322-87B3-ADA7D65A318B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03E7E992-5888-4322-87B3-ADA7D65A318B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03E7E992-5888-4322-87B3-ADA7D65A318B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E47ADFB-763A-4B62-A911-BA14589F525B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A99D2B3-9B7C-462C-8CF6-902515DAC8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

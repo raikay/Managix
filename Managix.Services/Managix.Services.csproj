@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Managix.Core\Managix.Core.csproj" />
     <ProjectReference Include="..\Managix.IServices\Managix.IServices.csproj" />
     <ProjectReference Include="..\Managix.Repository\Managix.Repository.csproj" />
   </ItemGroup>

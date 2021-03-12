@@ -192,7 +192,7 @@ namespace Managix.API.Common
 
                 options.IncludeXmlComments(Path.Combine(basePath, "Managix.API.xml"), true);
 
-                options.IncludeXmlComments(Path.Combine(basePath, "Managix.Infrastructure.xml"), true);
+                options.IncludeXmlComments(Path.Combine(basePath, "Managix.Core.xml"), true);
 
                 options.IncludeXmlComments(Path.Combine(basePath, "Managix.IServices.xml"));
 
