@@ -116,7 +116,7 @@ namespace Managix.API.Controllers
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost("uploadAvatar")]
-        public async Task<IResponseOutput> UploadAvatarAsync([FromServices] IUser _user, [FromServices] UploadHelper _uploadHelper, [FromForm] IFormFile file)
+        public async Task<IResponseOutput> UploadAvatarAsync([FromServices] ICurrentUser _user, [FromServices] UploadHelper _uploadHelper, [FromForm] IFormFile file)
         {
             var config = Configs.UploadConfig.Avatar;
             var res = await _uploadHelper.UploadAsync(file, config, new { _user.Id });

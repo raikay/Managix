@@ -14,7 +14,8 @@ namespace Managix.Services
         /// <summary>
         ///  当前登录用户
         /// </summary>
-        protected IUser User => BaseServiceProvider.GetRequiredService<IUser>();
+        /// CreateScope()创建请求内唯一，否则报错 不可以从 root Provider 恢复服务
+        protected ICurrentUser User => BaseServiceProvider.CreateScope().ServiceProvider.GetRequiredService<ICurrentUser>();
         /// <summary>
         /// 对象映射器
         /// </summary>

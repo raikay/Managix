@@ -18,13 +18,13 @@ namespace Managix.Services
 {
     public class UserService : Service, IUserService
     {
-        private readonly IUser _user;
+        private readonly ICurrentUser _user;
         private readonly IRepository<RolePermissionEntity> _rolePermissionRepo;
         private readonly IRepository<PermissionEntity> _permissionRepo;
         private readonly IRepository<UserEntity> _userRepo;
         private readonly IRepository<RoleEntity> _roleRepo;
         private readonly IMapperService _mapper;
-        public UserService(IRepository<PermissionEntity> permissionRepo, IMapperService mapper, IUser user, IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> repo, IRepository<RoleEntity> roleRepo)
+        public UserService(IRepository<PermissionEntity> permissionRepo, IMapperService mapper, ICurrentUser user, IRepository<RolePermissionEntity> rolePermissionRepo, IRepository<UserEntity> repo, IRepository<RoleEntity> roleRepo)
         {
             _user = user;
             _rolePermissionRepo = rolePermissionRepo;

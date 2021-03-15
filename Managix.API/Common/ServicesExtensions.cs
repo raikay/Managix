@@ -86,7 +86,7 @@ namespace Managix.API.Common
 
             //用户信息 (Singleton)
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, User>();
+            services.AddScoped<ICurrentUser, CurrentUser>();
 
             // Mapper
             services.TryAddSingleton<IMapperService, MapperService>();

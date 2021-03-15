@@ -26,7 +26,7 @@ namespace Managix.API.Attributes
                 return;
 
             //登录验证
-            var user = context.HttpContext.RequestServices.GetService<IUser>();
+            var user = context.HttpContext.RequestServices.GetService<ICurrentUser>();
             if (string.IsNullOrWhiteSpace(user?.Id))
             {
                 context.Result = new ChallengeResult();

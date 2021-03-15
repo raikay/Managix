@@ -7,7 +7,7 @@ namespace Managix.Infrastructure.Authentication
     /// <summary>
     /// 用户信息接口
     /// </summary>
-    public interface IUser
+    public interface ICurrentUser
     {
         /// <summary>
         /// 主键
