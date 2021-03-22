@@ -38,6 +38,26 @@ namespace Managix.API.Controllers
         }
 
         /// <summary>
+        /// 测试rang
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("testrang")]
+        [AllowAnonymous]
+        public IResponseOutput TestRang()
+        {
+            string str = "abcdefghijklmnopq";
+            System.Range range = 1..4;
+
+            var s1 = str[range];//bcd
+            var s2 = str[1..^1];//bcdefghijklmnopq
+            var s3 = str[0..^1];//abcdefghijklmnopq
+            var s4 = str[^1];//q
+            var s5 = str[^3];//o
+            var s6 = str[6..];//ghijklmnopq
+            return ResponseOutput.Ok();
+        }
+
+        /// <summary>
         /// 获取验证码
         /// </summary>
         /// <param name="lastKey">上次验证码键</param>
