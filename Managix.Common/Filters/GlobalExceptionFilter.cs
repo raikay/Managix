@@ -51,6 +51,18 @@ namespace Managix.Infrastructure.Filters
                 //标记异常已处理
                 context.ExceptionHandled = true;
             }
+
+
+            /*
+             
+        /// <summary>
+        /// 返回一个400错误
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static JAPXResponseException BadRequest(string message = "错误的请求。") =>
+            new(400, BadRequestCode, message);
+             */
         }
         /// <summary>
         /// 
