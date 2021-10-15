@@ -1,5 +1,7 @@
-﻿using Managix.Infrastructure;
+﻿using Managix.Common;
+using Managix.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
@@ -45,15 +47,11 @@ namespace Managix.Infrastructure.Filters
 
             message += $"|{context.Exception.StackTrace}";
             context.Result = new InternalServerErrorResult( ResponseOutput.NotOk(message));
-            //if (context.Exception is ValidationException vex)
-            //{
-            //    context.HttpContext.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-            //    context.Result = new ObjectResult(new AjaxExceptionResponse { Code = vex.Code, Message = vex.Message, Errors = vex.ValidationErrors });
-            //}
-            //else if (context.Exception is ResponseException ex)
-            //{
-            //    ProcessResponseException(ex, context);
-            //}
+            if (context.Exception is ResponseException vex)
+            {
+                context.HttpContext.Response.StatusCode = vex.Code;
+                //context.Result = new ObjectResult( ResponseOutput.NotOk(message));
+            }
             if (_env.IsProduction())
             {
                 //context.Result = new InternalServerErrorResult(new ResultData { Msg = message, Code = 0 });
