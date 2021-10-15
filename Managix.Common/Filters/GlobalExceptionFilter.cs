@@ -45,6 +45,15 @@ namespace Managix.Infrastructure.Filters
 
             message += $"|{context.Exception.StackTrace}";
             context.Result = new InternalServerErrorResult( ResponseOutput.NotOk(message));
+            //if (context.Exception is ValidationException vex)
+            //{
+            //    context.HttpContext.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+            //    context.Result = new ObjectResult(new AjaxExceptionResponse { Code = vex.Code, Message = vex.Message, Errors = vex.ValidationErrors });
+            //}
+            //else if (context.Exception is ResponseException ex)
+            //{
+            //    ProcessResponseException(ex, context);
+            //}
             if (_env.IsProduction())
             {
                 //context.Result = new InternalServerErrorResult(new ResultData { Msg = message, Code = 0 });

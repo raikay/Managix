@@ -302,6 +302,20 @@ namespace Managix.API.Common
                 //Newtonsoft.Json
                 .AddNewtonsoftJson(options =>
                 {
+
+
+
+                    // JsonSerializerDefaults.Web配置：
+                    //_propertyNameCaseInsensitive = true; // 不区分大小写的属性匹配
+                    //_jsonPropertyNamingPolicy = JsonNamingPolicy.CamelCase; // 对属性名称使用camel大小写
+                    //_numberHandling = JsonNumberHandling.AllowReadingFromString; // 允许或写入带引号的数字
+
+                    // 忽略空值
+                   // IgnoreNullValues = true,
+                // HTML不转义
+               // Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+
+
                     //修改属性名称的序列化方式，首字母小写
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
