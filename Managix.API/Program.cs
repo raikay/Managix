@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var hostBuilder = builder.Host;
 
-#region 配置文件
+//配置文件
 hostBuilder.ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
 {
     //初始化配置
@@ -17,8 +17,7 @@ hostBuilder.ConfigureAppConfiguration((hostBuilderContext, configurationBuilder)
     configurationBuilder.AddJsonFile("./Configs/uploadconfig.json");
     //configurationBuilder.
 });
-#endregion
-#region Nlog
+//NLog
 hostBuilder.ConfigureLogging(logging =>
 {
     logging.ClearProviders();
@@ -27,7 +26,7 @@ hostBuilder.ConfigureLogging(logging =>
 }).UseNLog();//其中，UseNLog是拓展方法，需要引入NLog.Web.AspNetCore;
 
 var logger = NLogBuilder.ConfigureNLog("./Configs/nlog.config").GetCurrentClassLogger();
-#endregion
+
 
 //初始化配置文件
 builder.Services.AddConfigs(builder.Configuration);
@@ -43,6 +42,7 @@ builder.Services.AddSwagger();
 builder.Services.SetController();
 
 builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 Service.BaseServiceProvider = app.Services;
 
