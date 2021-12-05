@@ -1,75 +1,68 @@
-using Autofac.Extensions.DependencyInjection;
-using Managix.Infrastructure.Configuration;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using NLog;
+using Managix.API.Common;
+using Managix.Services;
 using NLog.Web;
-using System;
 
-namespace Managix.API
+var builder = WebApplication.CreateBuilder(args);
+
+var hostBuilder = builder.Host;
+
+#region 配置文件
+hostBuilder.ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            #region Nlog
-            //var logger = LogManager.GetCurrentClassLogger();
-            var logger = NLogBuilder.ConfigureNLog("./Configs/nlog.config").GetCurrentClassLogger();
-            #endregion
-            try
-            {
-                Console.WriteLine("launching...");
-                //Console.WriteLine($"{string.Join("\r\n", appConfig.Urls)}\r\n");
-                CreateHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Stopped program because of exception");
-            }
-            finally
-            {
-                LogManager.Shutdown();
-            }
+    //初始化配置
+    configurationBuilder.AddJsonFile("appsettings.json");
+    configurationBuilder.AddJsonFile("./Configs/jwtconfig.json");
+    configurationBuilder.AddJsonFile("./Configs/dbconfig.json");
+    configurationBuilder.AddJsonFile("./Configs/cacheconfig.json");
+    configurationBuilder.AddJsonFile("./Configs/uploadconfig.json");
+    //configurationBuilder.
+});
+#endregion
+#region Nlog
+hostBuilder.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
+    logging.AddConsole();
+}).UseNLog();//其中，UseNLog是拓展方法，需要引入NLog.Web.AspNetCore;
 
+var logger = NLogBuilder.ConfigureNLog("./Configs/nlog.config").GetCurrentClassLogger();
+#endregion
 
-        }
+//初始化配置文件
+builder.Services.AddConfigs(builder.Configuration);
+//jwt
+builder.Services.AddJwt();
+//容器注入
+builder.Services.AddContainer();
+//缓存
+builder.Services.AddCaChe();
+//Swagger
+builder.Services.AddSwagger();
+//控制器配置
+builder.Services.SetController();
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            var builder = Host.CreateDefaultBuilder(args);
-            //注入方式更换为Autofac
-            //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            builder.ConfigureWebHostDefaults(webBuilder =>
-         {
-             webBuilder.UseStartup<Startup>();
-         });
+builder.Services.AddEndpointsApiExplorer();
+var app = builder.Build();
+Service.BaseServiceProvider = app.Services;
 
-            #region 配置文件
-            builder.ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
-            {
-                //初始化配置
-                configurationBuilder.AddJsonFile("appsettings.json");
-                configurationBuilder.AddJsonFile("./Configs/jwtconfig.json");
-                configurationBuilder.AddJsonFile("./Configs/dbconfig.json");
-                configurationBuilder.AddJsonFile("./Configs/cacheconfig.json");
-                configurationBuilder.AddJsonFile("./Configs/uploadconfig.json");
-                //configurationBuilder.
-            });
-            #endregion
-
-            #region Nlog
-            builder.ConfigureLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
-                logging.AddConsole();
-            }).UseNLog();//其中，UseNLog是拓展方法，需要引入NLog.Web.AspNetCore;
-            #endregion
-
-            return builder;
-        }
-
-    }
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseRouting();
+//认证
+app.UseAuthentication();
+//授权
+app.UseAuthorization();
+//静态文件
+app.UseStaticFilesMiddle();
+//Swagger文档
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwaggerMiddle();
+}
+app.MapControllers();
+
+app.Run();

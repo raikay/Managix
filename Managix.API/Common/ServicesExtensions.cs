@@ -300,6 +300,7 @@ namespace Managix.API.Common
             #region newtonsoft
                 //Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 //Newtonsoft.Json
+                //TODO 改回system.text.json
                 .AddNewtonsoftJson(options =>
                 {
 
