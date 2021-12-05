@@ -26,13 +26,16 @@ using System.IO;
 using Managix.API.Attributes;
 using Managix.API.Filters;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Managix.Common;
+using Managix.Common.Json;
+using Managix.Common.Json.SystemTextJson;
 
 namespace Managix.API.Common
 {
     /// <summary>
     /// 服务扩展
     /// </summary>
-    public static class ServicesExtensions
+    public static partial class ServicesExtensions
     {
         private static string basePath => AppContext.BaseDirectory;
         /// <summary>
@@ -110,7 +113,8 @@ namespace Managix.API.Common
 
             //操作日志
             //services.AddSingleton<ILogHandler, LogHandler>();
-            
+            services.AddSingleton<IJsonSerializer, SystemTextJsonSerializer>();
+
         }
 
         /// <summary>  
@@ -273,7 +277,7 @@ namespace Managix.API.Common
         /// 添加缓存
         /// </summary>
         /// <param name="services"></param>
-        public static void SetController(this IServiceCollection services)
+        public static void SetController(this IServiceCollection services, IConfiguration configuration)
         {
             //关闭自带的参数验证
             services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
@@ -324,6 +328,23 @@ namespace Managix.API.Common
                     options.SerializerSettings.Converters.Add(new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" });
                 });
             #endregion
+
+            
+            // 扫描所有模块
+            var modules = new List<IManagixModule>();
+            var paths = Directory.GetFiles(AppContext.BaseDirectory, "Managix.*.dll");
+            foreach (var path in paths)
+            {
+                modules.AddRange(Assembly.LoadFrom(path).GetTypes().Where(t => t.IsClass && !t.IsAbstract && typeof(IManagixModule).IsAssignableFrom(t))
+                    .Select(t => (IManagixModule)Activator.CreateInstance(t)));
+            }
+
+            // 初始化模块
+            foreach (var m in modules.OrderByDescending(_ => _.Order))
+            {
+                m.ConfigureServices(services, configuration);
+            }
+
         }
         #endregion
 

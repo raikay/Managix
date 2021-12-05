@@ -1,4 +1,5 @@
 using Managix.API.Common;
+using Managix.Redis;
 using Managix.Services;
 using NLog.Web;
 
@@ -39,10 +40,13 @@ builder.Services.AddCaChe();
 //Swagger
 builder.Services.AddSwagger();
 //øÿ÷∆∆˜≈‰÷√
-builder.Services.SetController();
+builder.Services.SetController(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 
+//builder.Services.AddStackExchangeRedis();
+
+//-------------------------------------------------------
 var app = builder.Build();
 Service.BaseServiceProvider = app.Services;
 

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Managix.Common\Managix.Common.csproj" />
+    <ProjectReference Include="..\Managix.Redis\Managix.Redis.csproj" />
     <ProjectReference Include="..\Managix.Services\Managix.Services.csproj" />
   </ItemGroup>
 
