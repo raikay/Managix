@@ -32,7 +32,7 @@ namespace Managix.API.Controllers
         /// <param name="end"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IResponseOutput> GetPermissionList(string key, DateTime? start, DateTime? end)
+        public async Task<IResponseOutput> GetPermissionList(string? key, DateTime? start, DateTime? end)
         {
             return await _permissionServices.GetPermissionListAsync(key, start, end);
         }
@@ -84,10 +84,11 @@ namespace Managix.API.Controllers
         /// <summary>
         /// 修改菜单
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut("Menu")]
-        public async Task<IResponseOutput> UpdateMenu(PermissionUpdateMenuInput input)
+        [HttpPut("Menu/{id}")]
+        public async Task<IResponseOutput> UpdateMenu(string id, PermissionUpdateMenuInput input)
         {
             return await _permissionServices.UpdateMenuAsync(input);
         }

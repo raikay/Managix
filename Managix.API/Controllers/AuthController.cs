@@ -64,7 +64,7 @@ namespace Managix.API.Controllers
         /// <returns></returns>
         [HttpGet("VerifyCode")]
         [AllowAnonymous]
-        public async Task<IResponseOutput> GetVerifyCode(string lastKey)
+        public async Task<IResponseOutput> GetVerifyCode(string? lastKey)
         {
             //var ss=ControllerContext.HttpContext;
             //var s1 = ControllerContext.HttpContext.Request;

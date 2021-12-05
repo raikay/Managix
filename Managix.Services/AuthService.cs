@@ -124,7 +124,7 @@ namespace Managix.Services
             }
             #endregion
 
-            var user = (await _userRepo.FindAsync(a => a.UserName == param.UserName));
+            var user = await _userRepo.FindAsync(a => a.UserName == param.UserName);
             if (string.IsNullOrWhiteSpace(user?.Id))
             {
                 return ResponseOutput.NotOk("账号输入有误!", 3);
